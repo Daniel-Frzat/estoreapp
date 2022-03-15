@@ -28,7 +28,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               Navigator.pop(context);
             },
           ),
-          title: const Text('back'),
+          title: Text(
+            product.title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontFamily: 'Anton',
+            ),
+          ),
         ),
         body: Container(
           color: const Color.fromARGB(255, 220, 255, 190),
@@ -96,8 +102,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ],
                     ),
                   ),
-                  //const Spacer(),
-                  Text('\n${product.description}'),
+                  Text('\n\n${product.description}'),
                 ],
               ),
             ],

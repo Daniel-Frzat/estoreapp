@@ -14,13 +14,13 @@ class Order {
       required this.address});
   Map<String, dynamic> toMap() {
     return {
-      'Id products': id,
-      'Name': name,
-      'Phone': phone,
-      'Quantity': quantity,
-      'Address': address,
-      'Locx': locx,
-      'Locy': locy,
+      'id_products': id,
+      'name': name,
+      'phone': phone,
+      'quantity': quantity,
+      'address': address,
+      'locx': locx,
+      'locy': locy,
     };
   }
 
@@ -28,15 +28,20 @@ class Order {
 
   factory Order.fromMap(Map<String, dynamic> map) {
     return Order(
-      id: map['Id products']?.toInt() ?? 0,
-      name: map['Name']?.toInt() ?? '',
-      quantity: map['Quantity'] ?? 0,
-      phone: map['Phone'] ?? '',
-      address: map['Address'] ?? '',
-      locx: map['Locx'] ?? 0.0,
-      locy: map['Locy'] ?? 0.0,
+      id: map['id_products']?.toInt() ?? 0,
+      name: map['name'] ?? '',
+      quantity: map['quantity'] ?? 0,
+      phone: int.parse(map['phone'] ?? 0),
+      address: map['address'] ?? '',
+      locx: map['locx'] ?? 0.0,
+      locy: map['locy'] ?? 0.0,
     );
   }
 
   factory Order.fromJson(String source) => Order.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return "name $name\nphone $phone\nquantity $quantity\nid $id\naddress $address\nlocx $locx\nlocy $locy";
+  }
 }

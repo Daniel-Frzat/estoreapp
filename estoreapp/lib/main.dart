@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:estorapp/screens/productsdetailsscreen.dart';
-//import 'package:estorapp/screens/splashscreen.dart';
 import 'package:estorapp/screens/productsscreen.dart';
 import 'package:estorapp/screens/orderscreen.dart';
 

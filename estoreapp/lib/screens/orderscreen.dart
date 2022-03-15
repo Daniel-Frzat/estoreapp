@@ -1,9 +1,7 @@
 import 'dart:developer';
-
 import 'package:estorapp/models/order.dart';
 import 'package:estorapp/models/product.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:location/location.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -26,16 +24,16 @@ Future<Order> createOrder(int id, String name, int phone, int quantity,
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, String>{
-      'Id products': id.toString(),
+      'id_products': id.toString(),
       'name': name,
       'phone': phone.toString(),
-      'Quantity': quantity.toString(),
+      'quantity': quantity.toString(),
       'address': address,
       'locx': locx.toString(),
       'locy': locy.toString(),
     }),
   );
-  if (response.statusCode == 201) {
+  if (response.statusCode == 200) {
     return Order.fromMap(jsonDecode(response.body));
   } else {
     throw Exception(response.statusCode);
@@ -70,7 +68,7 @@ class _OrderScreenState extends State<OrderScreen> {
       } else {
         _permissionGranted = await location.requestPermission();
         if (_permissionGranted != PermissionStatus.granted) {
-          SystemNavigator.pop();
+          Navigator.pop(context);
         } else {
           _locationData = await location.getLocation();
           latitude = _locationData.latitude!;
@@ -88,7 +86,7 @@ class _OrderScreenState extends State<OrderScreen> {
         } else {
           _permissionGranted = await location.requestPermission();
           if (_permissionGranted != PermissionStatus.granted) {
-            SystemNavigator.pop();
+            Navigator.pop(context);
           } else {
             _locationData = await location.getLocation();
             latitude = _locationData.latitude!;
@@ -96,7 +94,7 @@ class _OrderScreenState extends State<OrderScreen> {
           }
         }
       } else {
-        SystemNavigator.pop();
+        Navigator.pop(context);
       }
     }
     return location.getLocation();
@@ -124,12 +122,6 @@ class _OrderScreenState extends State<OrderScreen> {
         ),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_bag)),
-          //   IconButton(
-          //     onPressed: () {
-          //       Navigator.pop(context);
-          //     },
-          //     icon: const Icon(Icons.arrow_back),
-          //   ),
         ],
       ),
       body: FutureBuilder<LocationData>(
